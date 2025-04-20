@@ -29,9 +29,33 @@ location_options = ['Johor', 'Kedah', 'Kelantan', 'Kuala Lumpur', 'Labuan', 'Mel
 pipeline = joblib.load('pipeline_xgb.pkl')
 model_xgb = joblib.load('model_xgb.pkl')
 
-st.title("🚗 Car Price Prediction App")
+# --- Background Setting
+st.markdown("""
+    <style>
+        body {
+            background-color: #b3e0ff;  /* Light blue pastel background */
+        }
+        .stApp {
+            background-color: #e6f7ff;  /* Lighter shade for the app container */
+        }
+        .stButton>button {
+            background-color: #80ccff;  /* Light blue for buttons */
+            color: white;
+            font-size: 18px;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
-st.markdown("Fill in the details below to predict the estimated **used car price**.")
+# --- Title & Description
+st.title("🚗 **Used Car Price Prediction App**")
+st.markdown("""
+    This app predicts the **used car price** in Malaysia based on your car details.
+    Fill in the information below to get an estimated car price.
+    It uses a trained XGBoost model to make predictions.
+""")
+
+# --- Input Form Header
+st.header("Enter Car Details:")
 
 # --- Input form
 brand = st.selectbox("Brand", sorted(df['Brand'].unique()))
@@ -45,9 +69,9 @@ color = st.selectbox("Color", color_options)
 year = st.slider("Year", min_value=1970, max_value=2024, value=2020)
 transmission = st.selectbox("Transmission", transmission_options)
 
-# Display the selected car type (Luxury or Regular) based on the brand
+# --- Car Type Display
 car_type = 'Luxury' if brand.upper() in luxury_brands else 'Regular'
-st.write(f"Car Type: {car_type}")
+st.markdown(f"**Car Type:** {car_type} 🚙")
 
 # --- Predict Button
 if st.button("Predict Price"):
@@ -70,4 +94,20 @@ if st.button("Predict Price"):
     transformed_input = pipeline.transform(input_df)
     prediction = model_xgb.predict(transformed_input)
 
-    st.success(f"💰 Estimated Price: **RM {prediction[0]:,.2f}**")
+    # --- Display Result
+    st.markdown(f"### **💰 Estimated Price: RM {prediction[0]:,.2f}**")
+    st.markdown("This estimate is based on the car specifications provided.")
+
+    # --- Additional Information Section
+    st.markdown("---")
+    st.subheader("About This Model")
+    st.markdown("""
+    The prediction model is trained using various features like **engine size, car condition, mileage**, etc.
+    This application allows you to get an estimate of the car price based on these features.
+    Feel free to explore different brands and models for accurate price estimates.
+    """)
+
+# --- Footer Section
+st.markdown("---")
+st.markdown("Developed with ❤️ by Melanie.")
+st.markdown("[GitHub Repo](https://github.com/melanieyeee)")
