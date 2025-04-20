@@ -12,7 +12,12 @@ A machine learning-powered web application built with **Streamlit** that predict
 
 ## 📁 Project Structure
 
-car-price-prediction-app/ ├── app.py # Streamlit app ├── pipeline_xgb.pkl # Preprocessing pipeline (encoding, scaling, SVD) ├── model_xgb.pkl # Trained XGBoost model ├── requirements.txt # Required Python packages ├── README.md # Project overview └── data/ └── sample_data.csv # Sample data used for dropdown options
+- README.md: This file contains important information about the project, how to set it up, and how to run the application.
+- app.py: This is the main file for the Streamlit app. It contains the user interface and the logic to interact with the machine learning model, get user input, and make predictions based on the trained model.
+- pipeline_xgb.pkl: This file contains the preprocessing pipeline used in the app. It includes steps like one-hot encoding for categorical features, scaling for numeric features, and dimensionality reduction using TruncatedSVD. This is necessary to ensure the input data is processed exactly the same way as the training data.
+- model_xgb.pkl: This file stores the trained XGBoost model. The model is used to make predictions based on the processed input features.
+- requirements.txt: This file lists all the Python libraries and dependencies that the project requires to run. It is used to set up the environment by installing the necessary packages using the pip install -r requirements.txt command.
+- carbrandmodellist.csv : This folder contains any data that the project uses, store a small dataset with brands, models, variants, etc., used to populate dropdown options for the app interface.
 
 
 ## 🧠 Model Info
@@ -31,12 +36,17 @@ car-price-prediction-app/ ├── app.py # Streamlit app ├── pipeline_xg
 ```bash
 git clone https://github.com/yourusername/car-price-prediction-app.git
 cd car-price-prediction-app
+```
 
-### 2. Install Requirements
+### 2. Install Requirements**
+```bash
 pip install -r requirements.txt
+```
 
 ### 3. Run the Streamlit App
+```bash
 streamlit run app.py
+```
 
 ## 📝 Notes
 The model expects inputs to match the format and features used during training.
