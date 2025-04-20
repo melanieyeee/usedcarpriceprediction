@@ -13,31 +13,17 @@ import numpy as np
 import joblib  # or pickle
 from sklearn.pipeline import Pipeline
 
-# Define luxury car brands in uppercase
-luxury_brands = [
-    "ALFA ROMEO", "ASTON MARTIN", "AUDI", "BENTLEY", "BMW", "CADILLAC",
-    "FERRARI", "JAGUAR", "LAMBORGHINI", "LAND ROVER", "LEXUS", "LOTUS",
-    "MASERATI", "MCLAREN", "MERCEDES-BENZ", "MERCEDES-MAYBACH", "PORSCHE",
-    "ROLLS-ROYCE", "TESLA", "VOLVO"
-]
+# Read dataframe on brands and models
+file_path = 'carbrandmodellist.csv'
+df = pd.read_csv(file_path)
 
-# Example dataframe for car details
-df = pd.DataFrame({
-    'Brand': ['Toyota', 'Honda', 'BMW', 'Ford'],
-    'Model': ['Corolla', 'Civic', 'X5', 'Focus'],
-    'Variant': ['SE', 'EX', 'M Sport', 'Titanium'],
-    'Engine': [1800, 2000, 3000, 2500],
-    'Condition': ['Used', 'New', 'Used', 'New'],
-    'Location': ['KL', 'Penang', 'Selangor', 'Johor'],
-    'Mileage': [100000, 5000, 80000, 20000],
-    'Color': ['Red', 'Blue', 'Black', 'White'],
-    'Year': [2015, 2021, 2018, 2020],
-    'Transmission': ['Automatic', 'Manual', 'Automatic', 'Automatic']
-})
+luxury_brands = ["ALFA ROMEO", "ASTON MARTIN", "AUDI", "BENTLEY", "BMW", "CADILLAC", "FERRARI", "JAGUAR", "LAMBORGHINI", "LAND ROVER", "LEXUS", "LOTUS", "MASERATI", "MCLAREN", "MERCEDES-BENZ", "MERCEDES-MAYBACH", "PORSCHE", "ROLLS-ROYCE", "TESLA", "VOLKSWAGEN", "VOLVO"]
 
-# Convert to uppercase and add 'Car Type' column based on the brand
-df['Brand'] = df['Brand'].str.upper()  # Convert to uppercase for consistency
-df['Car Type'] = df['Brand'].apply(lambda x: 'Luxury' if x in luxury_brands else 'Regular')
+# Define predefined lists
+transmission_options = ['Automatic', 'Manual']
+color_options = ['Beige', 'Black', 'Blue', 'Brown', 'Bronze', 'Dark Blue', 'Gold', 'Gray', 'Green', 'Magenta', 'Maroon', 'Olive', 'Orange', 'Pink', 'Purple', 'Red', 'Silver', 'White', 'Yellow']
+condition_options = ['Commercial Car', 'New Car', 'Recon Car', 'Used Car']
+location_options = ['Johor', 'Kedah', 'Kelantan', 'Kuala Lumpur', 'Labuan', 'Melaka', 'Negeri Sembilan', 'Pahang', 'Penang', 'Perak', 'Putrajaya', 'Sabah', 'Selangor', 'Sarawak', 'Terengganu', 'Perlis', 'Pulau Pinang']
 
 # Load trained pipeline and model
 pipeline = joblib.load('pipeline_xgb.pkl')
@@ -52,12 +38,12 @@ brand = st.selectbox("Brand", sorted(df['Brand'].unique()))
 model = st.selectbox("Model", sorted(df[df['Brand'] == brand]['Model'].unique()))
 variant = st.selectbox("Variant", sorted(df[df['Model'] == model]['Variant'].unique()))
 engine = st.number_input("Engine (cc)", min_value=0, max_value=8000, step=100)
-condition = st.selectbox("Condition", sorted(df['Condition'].unique()))
-location = st.selectbox("Location", sorted(df['Location'].unique()))
+condition = st.selectbox("Condition", condition_options, index=condition_options.index('Used Car'))
+location = st.selectbox("Location", location_options)
 mileage = st.number_input("Mileage (km)", min_value=0, step=1000)
-color = st.selectbox("Color", sorted(df['Color'].unique()))
-year = st.slider("Year", min_value=1990, max_value=2025, value=2020)
-transmission = st.selectbox("Transmission", sorted(df['Transmission'].unique()))
+color = st.selectbox("Color", color_options)
+year = st.slider("Year", min_value=1970, max_value=2024, value=2020)
+transmission = st.selectbox("Transmission", transmission_options)
 
 # Display the selected car type (Luxury or Regular) based on the brand
 car_type = 'Luxury' if brand.upper() in luxury_brands else 'Regular'
