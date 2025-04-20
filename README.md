@@ -32,8 +32,16 @@ car-price-prediction-app/ ├── app.py # Streamlit app ├── pipeline_xg
 git clone https://github.com/yourusername/car-price-prediction-app.git
 cd car-price-prediction-app
 
-```2. Install Requirements
+### 2. Install Requirements
 pip install -r requirements.txt
 
-```3. Run the Streamlit App
+### 3. Run the Streamlit App
 streamlit run app.py
+
+## 📝 Notes
+The model expects inputs to match the format and features used during training.
+
+Ensure all necessary .pkl files are available in the root directory before running the app.
+
+## 📬 Contact
+If you find this useful or have suggestions for improvement, feel free to open an issue or reach out!
