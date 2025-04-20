@@ -37,7 +37,7 @@ git clone https://github.com/yourusername/car-price-prediction-app.git
 cd car-price-prediction-app
 ```
 
-### 2. Install Requirements**
+### 2. Install Requirements
 ```bash
 pip install -r requirements.txt
 ```
