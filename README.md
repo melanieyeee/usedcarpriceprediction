@@ -6,7 +6,6 @@ A machine learning-powered web application built with **Streamlit** that predict
 
 - Predict car prices based on user-selected specifications
 - Dynamic dropdowns for brand, model, and variant based on sample dataset
-- Auto-classification of car type as **Luxury** or **Regular**
 - Clean and interactive Streamlit interface
 - Built using preprocessed and dimensionally-reduced data for fast prediction
 
