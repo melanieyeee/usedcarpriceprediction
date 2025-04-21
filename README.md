@@ -26,7 +26,6 @@ A machine learning-powered web application built with **Streamlit** that predict
   - One-Hot Encoding for categorical variables
   - Standard Scaling for numeric variables
   - Dimensionality reduction using TruncatedSVD with 300 components
-  - Car Type (Luxury vs Regular) derived based on brand
 
 ## 🚀 Getting Started
 
