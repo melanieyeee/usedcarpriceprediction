@@ -51,7 +51,7 @@ st.title("🚗 **Used Car Price Prediction App**")
 st.markdown("""
     This app predicts the **used car price** in Malaysia based on your car details.
     Fill in the information below to get an estimated car price.
-    It uses a trained XGBoost model to make predictions.
+    It uses a trained Random Forest model to make predictions.
 """)
 
 # --- Input Form Header
